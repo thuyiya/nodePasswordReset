@@ -65,6 +65,10 @@ add these in your terminal
 127.0.0.1:3000
 ```
 
+### API Endpoints
+
+This is a lightweight web service, (REST interface), which provides an easy way to access the mail-client to reset password. 
+
    [node.js]: <http://nodejs.org>
    [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
    [nodemailer]: <https://nodemailer.com/>
