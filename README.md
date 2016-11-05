@@ -56,6 +56,16 @@ git init
 
 Now add these to your `package.json`.  go to the `package.json`. copy and paste givien bellow: Then hit enter after
 
+"Dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "mongoose": "*",
+    "cookie-parser": "*",
+    "jade": "*",
+    "static-favicon": "*",
+    "morgan": "*"
+  }
+
 ```sh
 npm install
 ```
