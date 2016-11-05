@@ -1,6 +1,6 @@
 # Password-reseter
 
-[![N|Solid](https://cldup.com/QHVAB_xBFk.png)](https://nodesource.com/products/nsolid)
+[![N|Solid](https://cldup.com/QHVAB_xBFk.png)](https://cldup.com/QHVAB_xBFk.png)
 
 Password-reseter is a besicaly, rest your password using mailclient here you can add HTML5 mail content separatly.
 
