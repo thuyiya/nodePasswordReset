@@ -13,7 +13,13 @@
     "cookie-parser": "*",
     "jade": "*",
     "static-favicon": "*",
-    "morgan": "*"
+    "express-session": "*",
+    "nodemailer": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "morgan": "*",
+    "bcrypt-nodejs": "*",
+    "async": "*"
   },
   "author": "thusitha jayalath",
   "license": "ISC"
