@@ -10,7 +10,8 @@ routerr.route('/signup')
 routerr.route('/forgot')
     .post(controller.forgot);
 
-routerr.route('/forgot')
-    .post(controller.forgot);
+routerr.route('/reset/:token')
+    .get(controller.tokenExpire)
+    .post(controller.token);
 
 module.exports=routerr;

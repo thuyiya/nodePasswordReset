@@ -55,7 +55,7 @@ var forgot= function(req, res, next){
         var smtpTransport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-            user: "mail",
+            user: "u-mail",
             pass: "pass" 
             }
         });
@@ -79,54 +79,64 @@ var forgot= function(req, res, next){
     });
 };
 
-var token = function(req, res) {
-  async.waterfall([
-    function(done) {
-      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-        if (!user) {
-          // res.send('Password reset token is invalid or has expired.');
-          return res.send('Password reset token is invalid or has expired.'); //res.redirect('back');
-        }
-
-        user.password = req.body.password;
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpires = undefined;
-
-        user.save(function(err) {
-          req.logIn(user, function(err) {
-            done(err, user);
-          });
-        });
-      });
-    },
-    function(user, done) {
-      var smtpTransport = nodemailer.createTransport('SMTP', {
-        service: 'SendGrid',
-        auth: {
-          user: '!!! YOUR SENDGRID USERNAME !!!',
-          pass: '!!! YOUR SENDGRID PASSWORD !!!'
-        }
-      });
-      var mailOptions = {
-        to: user.email,
-        from: 'passwordreset@demo.com',
-        subject: 'Your password has been changed',
-        text: 'Hello,\n\n' +
-          'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
-      };
-      smtpTransport.sendMail(mailOptions, function(err) {
-        // res.send('Success! Your password has been changed.');
-        done(err);
-      });
+var tokenExpire = function(req, res) {
+  userModel.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      // res.send('Password reset token is invalid or has expired.');
+      return res.send('Password reset token is invalid or has expired.');
     }
-  ], function(err) {
-    res.send('Success! Your password has been changed.');
+    res.send('Post the password\n' + res.user);
+    res.end()
+  });
+}
+
+var token = function(req, res) {
+    async.waterfall([
+        function(done) {
+        userModel.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+            if (!user) {
+            // res.send('Password reset token is invalid or has expired.');
+            return res.send('Password reset token is invalid or has expired.'); //res.redirect('back');
+            }
+
+            user.password = req.body.password;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function(err) {
+            //user loigin
+            });
+        });
+        },
+        function(user, done) {
+        var smtpTransport = nodemailer.createTransport('SMTP', {
+            service: 'SendGrid',
+            auth: {
+            user: '!!! YOUR SENDGRID USERNAME !!!',
+            pass: '!!! YOUR SENDGRID PASSWORD !!!'
+            }
+        });
+        var mailOptions = {
+            to: user.email,
+            from: 'passwordreset@demo.com',
+            subject: 'Your password has been changed',
+            text: 'Hello,\n\n' +
+            'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+            // res.send('Success! Your password has been changed.');
+            done(err);
+        });
+        }
+    ], function(err) {
+        res.send('Success! Your password has been changed.');
   });
 }
 
 module.exports = {
-    signup: signup,
-    showUsers : showUsers,
-    forgot: forgot,
-    token: token
+    signup      : signup,
+    showUsers   : showUsers,
+    forgot      : forgot,
+    token       : token,
+    tokenExpire : tokenExpire
 };
