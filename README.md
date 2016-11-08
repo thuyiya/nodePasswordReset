@@ -11,8 +11,7 @@ Password-reseter is a besicaly, rest your password using mailclient here you can
 
 Password-reseter uses a number of open source projects to work properly:
 
-* [AngularJS] - HTML enhanced for web apps!
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
+* [Jade] - HTML enhanced for email!
 * [node.js] - evented I/O for the backend
 * [Express] - fast node.js network app framework [@tjholowaychuk]
 * [Nodemailer] - the streaming build system
@@ -83,4 +82,4 @@ This is a lightweight web service, (REST interface), which provides an easy way 
    [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
    [nodemailer]: <https://nodemailer.com/>
    [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
+   [Jade]: https://www.npmjs.com/package/jade
